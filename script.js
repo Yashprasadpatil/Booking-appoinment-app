@@ -21,6 +21,12 @@ function submitDetails(event) {
     });
 }
 
+
+setTimeout(() => {
+    submitDetails();
+  }, 5000);
+
+
 window.addEventListener("DOMContentLoaded", () => {
   axios
     .get("https://crudcrud.com/api/5f6f32d475324156adc6bfd27d1108cd/appoinmentData")
@@ -35,6 +41,34 @@ window.addEventListener("DOMContentLoaded", () => {
       console.log(error);
     });
 });
+
+
+
+
+
+setInterval(() => {
+    const parentElem = document.getElementById("users");
+    parentElem.innerHTML = "";
+  
+    axios
+      .get("https://crudcrud.com/api/5f6f32d475324156adc6bfd27d1108cd/appoinmentData")
+      .then((response) => {
+        console.log(response);
+  
+        for (var i = 0; i < response.data.length; i++) {
+          showUserOnScreen(response.data[i]);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, 10000);
+
+
+
+
+
+
 
 function showUserOnScreen(obj) {
   const parentElem = document.getElementById("users");
@@ -95,7 +129,7 @@ function showUserOnScreen(obj) {
   };
 
 
-  
+
 
   childElem.appendChild(deleteButton);
   childElem.appendChild(editButton);
