@@ -10,6 +10,27 @@ function submitDetails(event) {
     mobile
   };
 
+
+
+
+  const updateButton = document.getElementById('updatebutton');
+  if (updateButton.style.display === 'block') {
+    const userId = localStorage.getItem('userId');
+    axios
+      .put(`https://crudcrud.com/api/5f6f32d475324156adc6bfd27d1108cd/appoinmentData/${userId}`, obj)
+      .then((response) => {
+        const parentElem = document.getElementById('users');
+        const childElem = parentElem.querySelector(`#${userId}`);
+        childElem.textContent = response.data.fname + ' - ' + response.data.email + ' - ' + response.data.mobile;
+        document.getElementById('submitbutton').style.display = 'block';
+        updateButton.style.display = 'none';
+        localStorage.removeItem('userId');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } else{
+
   axios
     .post("https://crudcrud.com/api/5f6f32d475324156adc6bfd27d1108cd/appoinmentData")
     .then((response) => {
@@ -19,6 +40,7 @@ function submitDetails(event) {
     .catch((err) => {
       console.log(err);
     });
+    }
 }
 
 
@@ -28,6 +50,13 @@ setTimeout(() => {
 
 
 window.addEventListener("DOMContentLoaded", () => {
+
+
+    document.getElementById('updatebutton').addEventListener('click', (event) => {
+        event.preventDefault();
+        submitDetails(event);
+      });
+        
   axios
     .get("https://crudcrud.com/api/5f6f32d475324156adc6bfd27d1108cd/appoinmentData")
     .then((response) => {
@@ -79,6 +108,22 @@ function showUserOnScreen(obj) {
   const deleteButton = document.createElement("input");
   deleteButton.type = "button";
   deleteButton.value = "Delete";
+
+
+  editButton.id = obj._id;
+  
+  editButton.addEventListener('click', () => {
+    document.getElementById('name').value = obj.fname;
+    document.getElementById('emailid').value = obj.email;
+    document.getElementById('phno').value = obj.mobile;
+    document.getElementById('submitbutton').style.display = 'none';
+    document.getElementById('updatebutton').style.display = 'block';
+  });
+ 
+  
+
+
+
 
 
 
@@ -136,3 +181,12 @@ function showUserOnScreen(obj) {
 
   parentElem.appendChild(childElem);
 }
+
+
+
+
+
+
+
+
+
