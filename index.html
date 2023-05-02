@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Appointment booking app</title>
+</head>
+<body>
+    <h1>Appointment booking</h1>
+    <form onsubmit="submitdetails(event)">
+        <lable>Name:</lable>
+        <input type="text" id="name">
+        <lable>Email:</lable>
+        <input type="email" id="emailid">
+        <lable>Phone-no:</lable>
+        <input type="number" id="phno">
+        <input type="submit" value="Submit">
+        <ul id="users"></ul>
+    </form>
+    <p class="footer">Made with ❤️ by Yashprasad</p>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
+
+
+
+
